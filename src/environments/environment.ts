@@ -1,4 +1,6 @@
-import { DeadYunuki } from 'src/dead-yunukis/dead-yunuki.entity';
+import { DeadYunuki } from 'src/dead-yunuki/dead-yunuki.entity';
+import { User } from 'src/user/user.entity';
+import { Yunuki } from 'src/yunuki/yunuki.entity';
 import { EnvironmentDto } from './environment.dto';
 
 const env = process.env.NODE_ENV;
@@ -10,8 +12,8 @@ export const environment: EnvironmentDto = {
     port: 3306,
     username: 'root',
     password: '1234',
-    database: 'test',
-    entities: [DeadYunuki],
+    database: 'yunuki_db',
+    entities: [DeadYunuki, Yunuki, User],
     synchronize: true,
   },
 };

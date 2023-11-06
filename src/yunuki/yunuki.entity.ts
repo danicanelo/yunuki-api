@@ -34,6 +34,5 @@ export class Yunuki {
   tiredness: number;
 
   @OneToOne(() => User)
-  @JoinColumn()
   user: User;
 }

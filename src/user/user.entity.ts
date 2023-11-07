@@ -1,14 +1,21 @@
 import { DeadYunuki } from 'src/dead-yunuki/dead-yunuki.entity';
 import { Yunuki } from 'src/yunuki/yunuki.entity';
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
+  @Column() //añadir unique=true, no sé cómo 
+  username: string;
 
   @Column()
   email: string;

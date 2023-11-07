@@ -6,6 +6,7 @@ import { DeadYunukisModule } from './dead-yunuki/dead-yunukis.module';
 import { environment } from './environments/environment';
 import { UsersModule } from './user/users.module';
 import { YunukisModule } from './yunuki/yunukis.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { YunukisModule } from './yunuki/yunukis.module';
     DeadYunukisModule,
     UsersModule,
     YunukisModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

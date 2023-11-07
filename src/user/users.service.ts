@@ -20,10 +20,10 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  getUser(id: number) {
+  getUser(username: string) {
     return this.userRepository.findOne({
       where: {
-        id,
+        username,
       },
     });
   }

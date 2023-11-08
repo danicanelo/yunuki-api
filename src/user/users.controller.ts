@@ -27,9 +27,9 @@ export default class UsersController {
     return this.usersService.getUsers();
   }
 
-  @Get(':id')
-  getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return this.usersService.getUser(id);
+  @Get(':username')
+  getUser(@Param('username', ParseIntPipe) username: string): Promise<User> {
+    return this.usersService.getUser(username);
   }
 
   @Delete(':id')

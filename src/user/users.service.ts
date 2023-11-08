@@ -9,7 +9,9 @@ import { User } from './user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+  ) {
+    this.populate();
+  }
 
   createUser(user: CreateUserDto) {
     const newUser = this.userRepository.create(user);
@@ -34,5 +36,16 @@ export class UsersService {
 
   updateUser(id: number, user: UpdateUserDto) {
     return this.userRepository.update({ id }, user);
+  }
+
+  async populate() {
+    const total = await this.userRepository.count();
+    if (total === 0) {
+      this.createUser({
+        username: 'yunukiDemo',
+        email: 'patata@patata.com',
+        password: '1234',
+      });
+    }
   }
 }

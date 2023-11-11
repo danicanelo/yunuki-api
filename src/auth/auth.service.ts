@@ -5,15 +5,18 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
   constructor(
+    // instanciamos los objetos correspondientes para acceder a sus métodos
     private usersService: UsersService,
     private jwtService: JwtService,
   ) {}
 
   async signIn(username: string, pass: string): Promise<any> {
     const user = await this.usersService.getUser(username);
+    //el interrogante evita errores y en caso de no existir user o de no contener un password no rompe el programa
     if (user?.password !== pass) {
       throw new UnauthorizedException();
     }
+    //sub y username indican la información que JWT va a almacenar en el token
     const payload = { sub: user.id, username: user.username };
     return {
       access_token: await this.jwtService.signAsync(payload),

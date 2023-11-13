@@ -16,6 +16,12 @@ export class Yunuki {
   name: string;
 
   @Column()
+  color: string;
+
+  @Column()
+  breed: string;
+
+  @Column()
   birth: Date;
 
   @Column()

@@ -24,21 +24,23 @@ export class Yunuki {
   @Column()
   birth: Date;
 
-  @Column()
-  age: number;
-
-  @Column()
+  @Column({
+    default: 0,
+  })
   hunger: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   boredom: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   dirt: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   tiredness: number;
-
-  @OneToOne(() => User)
-  user: User;
 }

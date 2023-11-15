@@ -1,6 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from 'src/user/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { UsersService } from 'src/user/users.service';
 
 @Injectable()
 export class AuthService {
@@ -10,7 +10,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(username: string, pass: string): Promise<any> {
+  async login(username: string, pass: string): Promise<any> {
     const user = await this.usersService.getUser(username);
     //el interrogante evita errores y en caso de no existir user o de no contener un password no rompe el programa
     if (user?.password !== pass) {

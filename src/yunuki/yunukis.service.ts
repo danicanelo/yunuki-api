@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Yunuki } from './yunuki.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/repository/Repository';
@@ -12,8 +12,34 @@ export class YunukisService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  createYunuki(yunuki: CreateYunukiDto, username: string) {
+  async createYunuki(yunuki: CreateYunukiDto, username: string) {
     const newYunuki = this.yunukiRepository.create(yunuki);
-    return this.yunukiRepository.save(newYunuki);
+    const user = await this.userRepository.findOne({
+      where: {
+        username,
+      },
+      relations: ['yunuki'],
+    });
+    if (!user) {
+      throw new NotFoundException('Usuario no encontrado');
+    }
+    user.yunuki = newYunuki;
+    await this.userRepository.save(user);
+    await this.yunukiRepository.save(newYunuki);
+    return newYunuki;
   }
+
+  // getYunuki(username: string) {
+  //   const user = this.userRepository.findOne({
+  //     where: {
+  //       username,
+  //     },
+  //     relations: ['yunuki'],
+  //   });
+  //   if (!user) {
+  //     throw new NotFoundException('El usuario no ha sido encontrado');
+  //   }
+  //   const yunuki = this.userRepository.save(user.yunukiId);
+  //   return yunuki;
+  // }
 }

@@ -1,6 +1,8 @@
+import { timeStamp } from 'console';
 import { User } from 'src/user/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
@@ -21,7 +23,7 @@ export class Yunuki {
   @Column()
   breed: string;
 
-  @Column()
+  @CreateDateColumn()
   birth: Date;
 
   @Column({

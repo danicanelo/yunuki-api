@@ -25,7 +25,9 @@ export class User {
   @Column()
   password: string;
 
-  @OneToOne(() => Yunuki)
+  @OneToOne(() => Yunuki, {
+    cascade: true,
+  })
   @JoinColumn()
   yunuki: Yunuki;
 

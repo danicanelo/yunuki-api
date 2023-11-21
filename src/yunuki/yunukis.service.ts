@@ -23,7 +23,9 @@ export class YunukisService {
     if (!user) {
       throw new NotFoundException('Usuario no encontrado');
     }
+    // Asigna el nuevo Yunuki al usuario
     user.yunuki = newYunuki;
+    // Guarda los cambios en el usuario y el nuevo Yunuki en los respectivos repositorios
     await this.userRepository.save(user);
     await this.yunukiRepository.save(newYunuki);
     return newYunuki;

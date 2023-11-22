@@ -17,7 +17,7 @@ import { UsersService } from './users.service';
 export default class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('register')
   createUser(@Body() newUser: CreateUserDto): Promise<User> {
     return this.usersService.createUser(newUser);
   }

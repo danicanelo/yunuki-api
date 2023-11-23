@@ -8,6 +8,7 @@ import { YunukisService } from './yunukis.service';
 @Controller('yunukis')
 export class YunukisController {
   constructor(private readonly yunukisService: YunukisService) {}
+
   @Post('create')
   createYunuki(
     @Body() newYunuki: CreateYunukiDto,

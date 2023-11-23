@@ -1,15 +1,14 @@
-import { Body, Controller, Post, Request, UseGuards, Get, Param, ParseIntPipe } from '@nestjs/common';
-import { YunukisService } from './yunukis.service';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateYunukiDto } from './dto/create-yunuki.dto';
 import { Yunuki } from './yunuki.entity';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { YunukisService } from './yunukis.service';
 
 @UseGuards(AuthGuard)
 @Controller('yunukis')
 export class YunukisController {
   constructor(private readonly yunukisService: YunukisService) {}
-
-  @Post()
+  @Post('create')
   createYunuki(
     @Body() newYunuki: CreateYunukiDto,
     @Request() request: Request,

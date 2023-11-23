@@ -31,17 +31,20 @@ export class YunukisService {
     return newYunuki;
   }
 
-  // getYunuki(username: string) {
-  //   const user = this.userRepository.findOne({
-  //     where: {
-  //       username,
-  //     },
-  //     relations: ['yunuki'],
-  //   });
-  //   if (!user) {
-  //     throw new NotFoundException('El usuario no ha sido encontrado');
-  //   }
-  //   const yunuki = this.userRepository.save(user.yunukiId);
-  //   return yunuki;
-  // }
+  async getYunuki(username: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        username,
+      },
+      relations: ['yunuki'],
+    });
+    if (!user) {
+      throw new NotFoundException('El usuario no ha sido encontrado');
+    }
+    if (!user.yunuki) {
+      throw new NotFoundException('El usuario no tiene ningún yunuki asociado');
+    }
+
+    return user.yunuki;
+  }
 }

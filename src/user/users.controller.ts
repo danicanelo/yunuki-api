@@ -7,7 +7,10 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
@@ -27,9 +30,10 @@ export default class UsersController {
     return this.usersService.getUsers();
   }
 
-  @Get(':username')
-  getUser(@Param('username', ParseIntPipe) username: string): Promise<User> {
-    return this.usersService.getUser(username);
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getUser(@Request() request: Request): Promise<User> {
+    return this.usersService.getUser(request['user'].username);
   }
 
   @Delete(':id')

@@ -22,10 +22,9 @@ export class YunukisController {
     @Request() request: Request,
   ): Promise<Yunuki> {
     return this.yunukisService.createYunuki(
-      newYunuki, // aquí van los datos del Yunuki, en el cuerpo de la solicitud
-      request['user'].username, // aquí va el usuario que realiza la solicitud
+      newYunuki,
+      request['user'].username,
     );
-    /*Hasta aquí simplemente llamamos al método createYunuki del servicio yunukisService y le pasamos los datos del nuevo Yunuki y el nombre de usuario del solicitante. Después retornamos el yunuki creado*/
   }
 
   @Get('get')

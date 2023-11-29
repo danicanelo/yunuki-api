@@ -6,8 +6,8 @@ export class CreateYunukiDto {
   name: string;
   @IsDefined()
   @IsNotEmpty()
-  color: string;
+  breed: string;
   @IsDefined()
   @IsNotEmpty()
-  breed: string;
+  color: string;
 }

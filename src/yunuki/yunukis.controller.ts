@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -30,5 +31,20 @@ export class YunukisController {
   @Get('get')
   getYunuki(@Request() request: Request): Promise<Yunuki> {
     return this.yunukisService.getYunuki(request['user'].username);
+  }
+
+  @Put('feed')
+  feed(@Request() request: Request): Promise<Yunuki> {
+    return this.yunukisService.feed(request['user'].username);
+  }
+
+  @Put('clean')
+  clean(@Request() request: Request): Promise<Yunuki> {
+    return this.yunukisService.clean(request['user'].username);
+  }
+
+  @Put('sleep')
+  sleep(@Request() request: Request): Promise<Yunuki> {
+    return this.yunukisService.sleep(request['user'].username);
   }
 }

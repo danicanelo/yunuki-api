@@ -68,30 +68,24 @@ export class YunukisService {
     return yunuki;
   }
 
-  // Esta expresión de cron ejecuta updateYunukis cada hora
-  @Cron('0 * * * *')
+  @Cron('0 * * * * *')
   async updateYunukis() {
     let yunukis = await this.yunukiRepository.find();
-    // yunukis contiene todos los yunukis vivos
     yunukis = yunukis.map((yunuki) => {
-      // Por cada Yunuki, actualizamos sus valores:
-      yunuki.hunger = this.getNewValue(yunuki.hunger);
-      yunuki.tiredness = this.getNewValue(yunuki.tiredness);
-      yunuki.dirt = this.getNewValue(yunuki.dirt);
+      yunuki.hunger = this.getNewValue(yunuki.hunger, 6);
+      yunuki.dirt = this.getNewValue(yunuki.dirt, 1);
+      yunuki.tiredness = this.getNewValue(yunuki.tiredness, 2);
       return yunuki;
     });
-    // Ahora yunukis contiene los valores actualizados
     this.yunukiRepository.save(yunukis);
-    // Falta la parte de matar aquellos que tengan todo a 10
   }
 
-  private getNewValue(oldValue: number) {
-    const newValue = oldValue + this.getIncrease();
+  private getNewValue(oldValue: number, maxValue: number) {
+    const newValue = oldValue + this.getIncrease(maxValue);
     return Math.min(newValue, 10);
   }
 
-  private getIncrease() {
-    // Devuelve un número aleatorio entre 1 y 3
-    return Math.floor(Math.random() * 3) + 1;
+  private getIncrease(maxValue: number) {
+    return Math.floor(Math.random() * (maxValue - 1)) + 1;
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DeadYunukisService } from 'src/dead-yunuki/dead-yunukis.service';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm/repository/Repository';
 import { CreateYunukiDto } from './dto/create-yunuki.dto';
@@ -11,6 +12,7 @@ export class YunukisService {
   constructor(
     @InjectRepository(Yunuki) private yunukiRepository: Repository<Yunuki>,
     @InjectRepository(User) private userRepository: Repository<User>,
+    private deadYunukiService: DeadYunukisService,
   ) {}
 
   async createYunuki(yunuki: CreateYunukiDto, username: string) {
@@ -78,6 +80,27 @@ export class YunukisService {
       return yunuki;
     });
     this.yunukiRepository.save(yunukis);
+    const deadYunukis = yunukis.filter((yunuki) => {
+      return yunuki.hunger + yunuki.dirt + yunuki.tiredness >= 30;
+    });
+    deadYunukis.map((yunuki) => {
+      this.ripYunuki(yunuki);
+    });
+  }
+
+  private async ripYunuki(yunuki: Yunuki) {
+    const user = await this.userRepository.findOne({
+      where: {
+        yunuki: { id: yunuki.id },
+      },
+      relations: ['yunuki'],
+    });
+    if (!user) {
+      return;
+    }
+    user.yunuki = null;
+    await this.userRepository.save(user);
+    await this.deadYunukiService.killYunuki(user, yunuki);
   }
 
   private getNewValue(oldValue: number, maxValue: number) {

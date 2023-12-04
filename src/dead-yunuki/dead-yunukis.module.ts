@@ -8,5 +8,6 @@ import { DeadYunukisService } from './dead-yunukis.service';
   imports: [TypeOrmModule.forFeature([DeadYunuki])],
   controllers: [DeadYunukisController],
   providers: [DeadYunukisService],
+  exports: [DeadYunukisService],
 })
 export class DeadYunukisModule {}

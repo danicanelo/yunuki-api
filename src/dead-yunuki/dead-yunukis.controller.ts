@@ -11,5 +11,5 @@ export class DeadYunukisController {
   @Get('get')
   getDeadYunukis(@Request() request: Request): Promise<DeadYunuki[]> {
     return this.deadYunukisService.getDeadYunukis(request['user'].username);
-  } //comprobar que está funcionando
+  }
 }

@@ -70,7 +70,7 @@ export class YunukisService {
     return yunuki;
   }
 
-  @Cron('0 * * * * *')
+  @Cron('*/15 * * * *')
   async updateYunukis() {
     let yunukis = await this.yunukiRepository.find();
     yunukis = yunukis.map((yunuki) => {

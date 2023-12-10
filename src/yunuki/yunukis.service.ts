@@ -82,7 +82,7 @@ export class YunukisService {
     this.yunukiRepository.save(yunukis);
     const deadYunukis = yunukis.filter((yunuki) => {
       return yunuki.hunger + yunuki.dirt + yunuki.tiredness >= 30;
-    });
+    }); //PROV, no queremos que mueran al sumar todo sino cuando una propiedad alcanza el tope
     deadYunukis.map((yunuki) => {
       this.ripYunuki(yunuki);
     });

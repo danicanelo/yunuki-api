@@ -25,7 +25,7 @@ export class DeadYunukisService {
       user,
     });
     await this.deadYunukiRepository.save(deadYunuki);
-    await this.yunukiRepository.delete(yunuki); //no está funcionando
+    await this.yunukiRepository.delete(yunuki); //no está funcionando, ¿pero queremos que funcione? Valorar si eliminar registro o no (dependiendo de si volcamos los datos a dead-yunuki en BD)
   }
 
   private getDeadAge(yunuki: Yunuki) {

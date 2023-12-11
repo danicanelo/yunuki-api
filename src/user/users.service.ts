@@ -30,6 +30,15 @@ export class UsersService {
     });
   }
 
+  getUserWithRelations(username: string) {
+    return this.userRepository.findOne({
+      where: {
+        username,
+      },
+      relations: ['deadyunukis', 'yunuki'],
+    });
+  }
+
   deleteUser(id: number) {
     return this.userRepository.delete({ id });
   }

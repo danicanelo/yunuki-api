@@ -1,10 +1,8 @@
-import { User } from 'src/user/user.entity';
 import { Yunuki } from 'src/yunuki/yunuki.entity';
 import {
   Column,
   Entity,
   JoinColumn,
-  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -26,7 +24,4 @@ export class DeadYunuki {
   @OneToOne(() => Yunuki)
   @JoinColumn()
   yunuki: Yunuki;
-
-  @ManyToOne(() => User, (user) => user.deadyunukis)
-  user: User;
 }

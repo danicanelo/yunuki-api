@@ -1,13 +1,5 @@
-import { DeadYunuki } from 'src/dead-yunuki/dead-yunuki.entity';
 import { Yunuki } from 'src/yunuki/yunuki.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -16,7 +8,7 @@ export class User {
 
   @Column({
     unique: true,
-  }) 
+  })
   username: string;
 
   @Column()
@@ -25,12 +17,6 @@ export class User {
   @Column()
   password: string;
 
-  @OneToOne(() => Yunuki, {
-    cascade: true,
-  })
-  @JoinColumn()
-  yunuki: Yunuki;
-
-  @OneToMany(() => DeadYunuki, (deadyunuki) => deadyunuki.user)
-  deadyunukis: DeadYunuki[];
+  @OneToMany(() => Yunuki, (yunuki) => yunuki.user)
+  yunukis: Yunuki[];
 }

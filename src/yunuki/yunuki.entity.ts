@@ -1,7 +1,10 @@
+import { Breed } from 'src/breed/breed.entity';
+import { User } from 'src/user/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -12,9 +15,6 @@ export class Yunuki {
 
   @Column()
   name: string;
-
-  @Column()
-  breed: string;
 
   @Column()
   color: string;
@@ -36,4 +36,10 @@ export class Yunuki {
     default: 0,
   })
   tiredness: number;
+
+  @ManyToOne(() => Breed, (breed) => breed.yunukis)
+  breed: Breed;
+
+  @ManyToOne(() => User, (user) => user.yunukis)
+  user: User;
 }

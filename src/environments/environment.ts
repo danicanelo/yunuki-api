@@ -1,4 +1,4 @@
-import { DeadYunuki } from 'src/dead-yunuki/dead-yunuki.entity';
+import { Breed } from 'src/breed/breed.entity';
 import { User } from 'src/user/user.entity';
 import { Yunuki } from 'src/yunuki/yunuki.entity';
 import { EnvironmentDto } from './environment.dto';
@@ -13,7 +13,7 @@ export const environment: EnvironmentDto = {
     username: 'root',
     password: '1234',
     database: 'yunuki_db',
-    entities: [DeadYunuki, Yunuki, User],
+    entities: [Breed, Yunuki, User],
     synchronize: true,
   },
 };

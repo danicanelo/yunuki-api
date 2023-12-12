@@ -47,7 +47,7 @@ export class UsersService {
     return this.userRepository.update({ id }, user);
   }
 
-  async populate() {
+  private async populate() {
     const total = await this.userRepository.count();
     if (total === 0) {
       this.createUser({

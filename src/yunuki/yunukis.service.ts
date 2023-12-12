@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeadYunukisService } from 'src/dead-yunuki/dead-yunukis.service';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm/repository/Repository';
 import { CreateYunukiDto } from './dto/create-yunuki.dto';
@@ -12,7 +11,6 @@ export class YunukisService {
   constructor(
     @InjectRepository(Yunuki) private yunukiRepository: Repository<Yunuki>,
     @InjectRepository(User) private userRepository: Repository<User>,
-    private deadYunukiService: DeadYunukisService,
   ) {}
 
   async createYunuki(yunuki: CreateYunukiDto, username: string) {

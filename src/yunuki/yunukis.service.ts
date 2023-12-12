@@ -74,6 +74,7 @@ export class YunukisService {
   async updateYunukis() {
     let yunukis = await this.yunukiRepository.find();
     yunukis = yunukis.map((yunuki) => {
+      // Por cada yunuki establecemos la velocidad a la que suben sus parámetros, establecida en DB según la raza
       yunuki.hunger = this.getNewValue(yunuki.hunger, 6);
       yunuki.dirt = this.getNewValue(yunuki.dirt, 1);
       yunuki.tiredness = this.getNewValue(yunuki.tiredness, 2);
@@ -81,8 +82,8 @@ export class YunukisService {
     });
     this.yunukiRepository.save(yunukis);
     const deadYunukis = yunukis.filter((yunuki) => {
-      return yunuki.hunger + yunuki.dirt + yunuki.tiredness >= 30;
-    }); //PROV, no queremos que mueran al sumar todo sino cuando una propiedad alcanza el tope
+      return yunuki.hunger + yunuki.dirt + yunuki.tiredness >= 10;
+    }); //PROV, no queremos que mueran al sumar todo sino cuando una propiedad alcanza el tope (intentado ||, pero mata al yunuki en cuanto sube cualquier parámetro)
     deadYunukis.map((yunuki) => {
       this.ripYunuki(yunuki);
     });

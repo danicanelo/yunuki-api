@@ -16,11 +16,11 @@ export class Yunuki {
   @Column()
   name: string;
 
-  @Column()
-  color: string;
-
   @CreateDateColumn()
   birth: Date;
+
+  @CreateDateColumn()
+  dead: Date;
 
   @Column({
     default: 0,

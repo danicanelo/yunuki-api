@@ -21,9 +21,6 @@ export class Breed {
   @Column()
   color: string;
 
-  @Column()
-  form: string;
-
   @OneToMany(() => Yunuki, (yunuki) => yunuki.breed)
   yunukis: Yunuki[];
 }

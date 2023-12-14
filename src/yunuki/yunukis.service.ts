@@ -19,50 +19,73 @@ export class YunukisService {
       where: {
         username,
       },
-      relations: ['yunuki'],
+      relations: ['yunukis'],
     });
     if (!user) {
       throw new NotFoundException('Usuario no encontrado');
     }
-    user.yunuki = newYunuki;
+    user.yunukis.push(newYunuki);
     await this.userRepository.save(user);
     await this.yunukiRepository.save(newYunuki);
     return newYunuki;
   }
 
-  async getYunuki(username: string) {
+  async getAliveYunuki(username: string) {
     const user = await this.userRepository.findOne({
       where: {
         username,
       },
-      relations: ['yunuki'],
+      relations: ['yunukis'],
     });
     if (!user) {
       throw new NotFoundException('El usuario no ha sido encontrado');
     }
-    if (!user.yunuki) {
-      throw new NotFoundException('El usuario no tiene ningún yunuki asociado');
+    const aliveYunuki = user.yunukis.find(function yunukiAlive(yunuki) {
+      return yunuki.dead === null;
+    });
+
+    if (!aliveYunuki) {
+      throw new NotFoundException(
+        'El usuario no está cuidando un yunuki ahora mismo',
+      );
     }
 
-    return user.yunuki;
+    return aliveYunuki;
+  }
+
+  async getDeadYunukis(username: string) {
+    const user = await this.userRepository.findOne({
+      where: {
+        username,
+      },
+      relations: ['yunukis'],
+    });
+    if (!user) {
+      throw new NotFoundException('El usuario no ha sido encontrado');
+    }
+    const deadYunukis = user.yunukis.filter(function deadYunukis(yunuki) {
+      return yunuki.dead;
+    });
+
+    return deadYunukis;
   }
 
   async feed(username: string) {
-    const yunuki = await this.getYunuki(username);
+    const yunuki = await this.getAliveYunuki(username);
     yunuki.hunger = 0;
     await this.yunukiRepository.save(yunuki);
     return yunuki;
   }
 
   async clean(username: string) {
-    const yunuki = await this.getYunuki(username);
+    const yunuki = await this.getAliveYunuki(username);
     yunuki.dirt = 0;
     await this.yunukiRepository.save(yunuki);
     return yunuki;
   }
 
   async sleep(username: string) {
-    const yunuki = await this.getYunuki(username);
+    const yunuki = await this.getAliveYunuki(username);
     yunuki.tiredness = 0;
     await this.yunukiRepository.save(yunuki);
     return yunuki;
@@ -80,26 +103,16 @@ export class YunukisService {
     });
     this.yunukiRepository.save(yunukis);
     const deadYunukis = yunukis.filter((yunuki) => {
-      return yunuki.hunger + yunuki.dirt + yunuki.tiredness >= 10;
-    }); //PROV, no queremos que mueran al sumar todo sino cuando una propiedad alcanza el tope (intentado ||, pero mata al yunuki en cuanto sube cualquier parámetro)
+      return yunuki.hunger >= 10 || yunuki.dirt >= 10 || yunuki.tiredness >= 10;
+    });
     deadYunukis.map((yunuki) => {
       this.ripYunuki(yunuki);
     });
   }
 
-  private async ripYunuki(yunuki: Yunuki) {
-    const user = await this.userRepository.findOne({
-      where: {
-        yunuki: { id: yunuki.id },
-      },
-      relations: ['yunuki'],
-    });
-    if (!user) {
-      return;
-    }
-    user.yunuki = null;
-    await this.userRepository.save(user);
-    await this.deadYunukiService.killYunuki(user, yunuki);
+  private ripYunuki(yunuki: Yunuki) {
+    yunuki.dead = new Date();
+    this.yunukiRepository.save(yunuki);
   }
 
   private getNewValue(oldValue: number, maxValue: number) {

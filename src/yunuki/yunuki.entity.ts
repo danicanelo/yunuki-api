@@ -19,7 +19,9 @@ export class Yunuki {
   @CreateDateColumn()
   birth: Date;
 
-  @CreateDateColumn()
+  @Column({
+    nullable: true,
+  })
   dead: Date;
 
   @Column({

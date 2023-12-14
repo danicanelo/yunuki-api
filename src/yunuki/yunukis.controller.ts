@@ -30,7 +30,12 @@ export class YunukisController {
 
   @Get('get')
   getYunuki(@Request() request: Request): Promise<Yunuki> {
-    return this.yunukisService.getYunuki(request['user'].username);
+    return this.yunukisService.getAliveYunuki(request['user'].username);
+  }
+
+  @Get('get-dead')
+  getDeadYunukis(@Request() request: Request): Promise<Yunuki[]> {
+    return this.yunukisService.getDeadYunukis(request['user'].username);
   }
 
   @Put('feed')

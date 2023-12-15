@@ -21,12 +21,28 @@ export class BreedService {
     const total = await this.breedRepository.count();
     if (total === 0) {
       this.createBreed({
-        name: 'Yonoko',
+        name: 'Yanaka',
         hunger_points: 6,
         dirt_points: 2,
         tiredness_points: 2,
         color: 'green',
-        form: 'square',
+        form: '1',
+      });
+      this.createBreed({
+        name: 'Yonoko',
+        hunger_points: 2,
+        dirt_points: 6,
+        tiredness_points: 2,
+        color: 'blue',
+        form: '2',
+      });
+      this.createBreed({
+        name: 'Yiniki',
+        hunger_points: 2,
+        dirt_points: 2,
+        tiredness_points: 6,
+        color: 'red',
+        form: '3',
       });
     }
   }

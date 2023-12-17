@@ -13,15 +13,9 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   // Establecemos qué ocurrirá cuando el cliente solicite realizar un POST con el end-point 'login'
   @Post('login')
-  // Se ejecuta la función 'login' cuyo parámetro es el decorador @Body (que significa que obtiene los datos del cuerpo de la solicitud) junto con un objeto de tipo 'LoginDto', que indica la estructura que deben cumplir los datos obtenidos (el "molde" en el que deben "encajar")
+  // Se ejecuta la función 'login' cuyo parámetro es el decorador @Body (que se encarga de obtener los datos del cuerpo de la solicitud) junto con un objeto de tipo 'LoginDto', que indica la estructura que deben cumplir los datos obtenidos (el "molde" en el que deben "encajar")
   login(@Body() loginDto: LoginDto) {
-    // Enviamos los datos obtenidos (username y password) al método 'login', del que podemos hacer uso gracias a haber instanciado un objeto de tipo AuthService en el constructor. Lo que este método nos devuelva será retornado al punto desde el que se hizo la llamada
+    // Enviamos los datos obtenidos (username y password) al método 'login', del que podemos hacer uso gracias a haber instanciado un objeto de tipo AuthService en el constructor. Este método devuelve al navegador, si todo ha ido correctamente, un token con la información (id y nombre de usuario) codificada 
     return this.authService.login(loginDto.username, loginDto.password);
   }
-
-  /*@UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Request() request: Request) {
-    return request['user'];
-  }*/
 }

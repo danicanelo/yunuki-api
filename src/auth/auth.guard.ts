@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     // Almacenamos el token de la solicitud haciendo uso de un método privado propio establecido más abajo, pasándole como parámetro la request (la solicitud) obtenida anteriormente
     const token = this.extractTokenFromHeader(request);
-    // Si token es undefined, lanzamos una excepción de No Autorizado y la función termina 
+    // Si token es undefined, lanzamos una excepción de No Autorizado y la función termina
     if (!token) {
       throw new UnauthorizedException();
     }

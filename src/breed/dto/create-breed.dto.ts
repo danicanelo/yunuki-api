@@ -1,5 +1,6 @@
 import { IsDefined, IsNotEmpty } from 'class-validator';
 
+// PEND, diferencias entre @IsDefined y @IsNotEmpty
 export class CreateBreedDto {
   @IsDefined()
   @IsNotEmpty()

@@ -27,6 +27,7 @@ export class UsersService {
       where: {
         username,
       },
+      relations: ['yunukis'],
     });
   }
 

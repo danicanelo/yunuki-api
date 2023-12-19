@@ -14,20 +14,26 @@ export class YunukisService {
   ) {}
 
   async createYunuki(yunuki: CreateYunukiDto, username: string) {
-    const newYunuki = this.yunukiRepository.create(yunuki);
-    const user = await this.userRepository.findOne({
-      where: {
-        username,
-      },
-      relations: ['yunukis'],
-    });
-    if (!user) {
-      throw new NotFoundException('Usuario no encontrado');
+    try {
+      const aliveYunuki = await this.getAliveYunuki(username);
+      return aliveYunuki;
+    } catch (e) {
+      const newYunuki = this.yunukiRepository.create(yunuki);
+      const user = await this.userRepository.findOne({
+        where: {
+          username,
+        },
+        //relations: ['yunukis'],
+      });
+      if (!user) {
+        throw new NotFoundException('Usuario no encontrado');
+      }
+      //user.yunukis.push(newYunuki);
+      newYunuki.user = user;
+      //await this.userRepository.save(user);
+      await this.yunukiRepository.save(newYunuki);
+      return newYunuki;
     }
-    user.yunukis.push(newYunuki);
-    await this.userRepository.save(user);
-    await this.yunukiRepository.save(newYunuki);
-    return newYunuki;
   }
 
   async getAliveYunuki(username: string) {

@@ -11,7 +11,7 @@ export class AuthController {
 
   // Establecemos el código de estado HTTP que se devolverá al cliente si las instrucciones a continuación son ejecutadas con éxito
   @HttpCode(HttpStatus.OK)
-  // Establecemos qué ocurrirá cuando el cliente solicite realizar un POST con el end-point 'login'
+  // Establecemos qué ocurrirá cuando el cliente haga una solicitud HTTP POST bajo el end-point 'login'
   @Post('login')
   // Se ejecuta la función 'login' cuyo parámetro es el decorador @Body (que se encarga de obtener los datos del cuerpo de la solicitud) junto con un objeto de tipo 'LoginDto', que indica la estructura que deben cumplir los datos obtenidos (el "molde" en el que deben "encajar")
   login(@Body() loginDto: LoginDto) {
@@ -19,3 +19,4 @@ export class AuthController {
     return this.authService.login(loginDto.username, loginDto.password);
   }
 }
+ 

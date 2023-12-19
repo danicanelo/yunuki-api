@@ -14,7 +14,7 @@ export class User {
   id: number;
 
   @Column({
-    unique: true,
+    unique: true, // Indicamos que el valor de este campo debe ser único y no repetido en el resto de los registros de la tabla
   })
   username: string;
 

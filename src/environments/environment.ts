@@ -9,7 +9,7 @@ const env = process.env.NODE_ENV;
 // PEND
 export const environment: EnvironmentDto = {
   typeOrmModuleOptions: {
-    // Tipo de nuesta DB
+    // Tipo de nuestra DB
     type: 'mysql',
     // Si nuestro 'env' es igual a development conectamos con localhost, si no lo es conectamos con una ip remota (ficticia en nuestro caso actualmente)
     host: env === 'development' ? 'localhost' : '182.192.56.7',

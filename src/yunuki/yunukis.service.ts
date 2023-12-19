@@ -97,7 +97,7 @@ export class YunukisService {
     return yunuki;
   }
 
-  @Cron('*/15 * * * *')
+  @Cron('* * * * *') // '*/15 * * * *' para cada 15 min
   async updateYunukis() {
     let yunukis = await this.yunukiRepository.find();
     yunukis = yunukis.map((yunuki) => {

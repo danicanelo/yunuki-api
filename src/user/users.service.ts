@@ -29,7 +29,7 @@ export class UsersService {
 
   //Método para obtener un usuario. Recibe un username.
   getUser(username: string) {
-    // El método findOne recibe como parámetros un objeto con la clave where, que se asemeja a una condición WHERE en SQL obteniendo el usuario cuyo nombre coincida, y un array que contiene las relaciones ...DESARROLLAR
+    // El método findOne recibe como parámetro un objeto con dos pares clave-valor (where y relations), donde 'where' funciona a modo de claúsula WHERE en SQL, buscando el usuario cuyo username coincide con el recibido, y relations funciona añadiendo al objeto que retorne (el usuario encontrado) todas las entidades de la tabla yunuki que posea
     return this.userRepository.findOne({
       where: {
         username,

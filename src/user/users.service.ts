@@ -5,24 +5,31 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 
+// El decorador @Injectable permite que podamos usar la clase UsersService como dependencia. Esto nos servirá para hacer uso de ella como servicio.
 @Injectable()
 export class UsersService {
   constructor(
+    // Instanciamos un objeto que actúe como un repositorio de tipo User. Para ello inyectamos primero la clase Breed
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {
+    // BORRAR AL FINAL
     this.populate();
   }
 
+  // Método para crear un usuario. Recibe un objeto de tipo CreateUserDto. Devuelve el usuario creado.
   createUser(user: CreateUserDto) {
     const newUser = this.userRepository.create(user);
     return this.userRepository.save(newUser);
   }
 
+  // Método para obtener todos los usuarios
   getUsers() {
     return this.userRepository.find();
   }
 
+  //Método para obtener un usuario. Recibe un username.
   getUser(username: string) {
+    // El método findOne recibe como parámetros un objeto con la clave where, que se asemeja a una condición WHERE en SQL obteniendo el usuario cuyo nombre coincida, y un array que contiene las relaciones ...DESARROLLAR
     return this.userRepository.findOne({
       where: {
         username,

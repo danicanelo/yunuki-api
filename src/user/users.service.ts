@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 
 // El decorador @Injectable permite que podamos usar la clase UsersService como dependencia. Esto nos servirá para hacer uso de ella como servicio.
@@ -29,7 +28,7 @@ export class UsersService {
 
   //Método para obtener un usuario. Recibe un username.
   getUser(username: string) {
-    // El método findOne recibe como parámetro un objeto con dos pares clave-valor (where y relations), donde 'where' funciona a modo de claúsula WHERE en SQL, buscando el usuario cuyo username coincide con el recibido, y relations funciona añadiendo al objeto que retorne (el usuario encontrado) todas las entidades de la tabla yunuki que posea
+    // El método findOne recibe como parámetro un objeto con dos pares clave-valor (where y relations), donde 'where' funciona a modo de claúsula WHERE en SQL, buscando el usuario cuyo username coincide con el recibido, y relations funciona añadiendo al objeto que retorne (el usuario encontrado) todas las entidades de la tabla yunuki que éste posea
     return this.userRepository.findOne({
       where: {
         username,
@@ -38,7 +37,7 @@ export class UsersService {
     });
   }
 
-  getUserWithRelations(username: string) {
+  /*getUserWithRelations(username: string) {
     return this.userRepository.findOne({
       where: {
         username,
@@ -53,7 +52,7 @@ export class UsersService {
 
   updateUser(id: number, user: UpdateUserDto) {
     return this.userRepository.update({ id }, user);
-  }
+  }*/ //POSIBLEMENTE INNECESARIO
 
   private async populate() {
     const total = await this.userRepository.count();

@@ -44,7 +44,7 @@ export class YunukisController {
     return this.yunukisService.getDeadYunukis(request['user'].username);
   }
 
-  // Los siguientes tres métodos sirven para ejecutar las acciones de cuidado del yunuki (alimentar, limpiar y dormir). Como son exactamente iguales, únicamente describiremos la primera. Al hacer una solicitud HTTP PUT a la ruta 'yunukis/feed' ejecutamos la función que obtiene como argumento la solicitud. Llama a la función homónima del servicio pasándole como argumento el nombre de usuario obtenido en la solicitud, esta función se encargará de setear a 0 el valor de hambre del yunuki en la base de datos
+  // Los siguientes tres métodos sirven para ejecutar las acciones de cuidado del yunuki (alimentar, limpiar y dormir). Como son exactamente iguales, únicamente describiremos la primera. Al hacer una solicitud HTTP PUT a la ruta 'yunukis/feed' ejecutamos la función que obtiene como argumento la solicitud. Llama a la función homónima del servicio pasándole como argumento el nombre de usuario obtenido en la solicitud, esta función se encargará de setear a 0 el valor de hambre del yunuki en la base de datos. Lo mismo para 'clean' y 'sleep'
   @Put('feed')
   feed(@Request() request: Request): Promise<Yunuki> {
     return this.yunukisService.feed(request['user'].username);

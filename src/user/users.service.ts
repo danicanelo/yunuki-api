@@ -60,7 +60,7 @@ export class UsersService {
       this.createUser({
         username: 'yunukiDemo',
         email: 'patata@patata.com',
-        password: '1234',
+        password: '123456',
       });
     }
   }

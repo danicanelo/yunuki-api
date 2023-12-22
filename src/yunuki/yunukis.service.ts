@@ -152,13 +152,17 @@ export class YunukisService {
     this.yunukiRepository.save(yunuki);
   }
 
-  // Utilizamos este método para aumentar los puntos de hambre, suciedad y cansancio de los yunukis. CONTINUAR
+  // Utilizamos este método para aumentar los puntos de hambre, suciedad y cansancio de los yunukis.
   private getNewValue(oldValue: number, maxValue: number) {
+    // Utilizamos getIncrease, establecido más abajo, que se encargaŕa de obtener un valor aleatorio en base al maxValue recibido. Lo sumamos a oldValue y almacenamos el resultado
     const newValue = oldValue + this.getIncrease(maxValue);
+    // Math.min devuelve el valor más pequeño entre newValue y 10, es una forma de asegurarnos de que el resultado nunca va a ser superior a 10, que es el límite máximo de puntos que queremos para las stats de los yunukis
     return Math.min(newValue, 10);
   }
 
+  //Este método obtiene un valor aleatorio en base al maxValue recibido
   private getIncrease(maxValue: number) {
+    // Dentro del paréntesis: Math.random genera un número aleatorio entre 0 y 1, a maxValue le restamos uno y lo multiplicamos por el random generado, tras lo que sumaremos 1 al resultado total. Lo hacemos así para que el rango siempre sea entre 1 y el maxValue recibido, de lo contrario el resultado sería un rango inmediatamente inferior (entre 0 y un número menos de maxValue). Retornamos el resultado
     return Math.floor(Math.random() * (maxValue - 1)) + 1;
   }
 }

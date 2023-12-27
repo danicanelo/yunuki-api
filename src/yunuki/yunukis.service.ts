@@ -48,7 +48,7 @@ export class YunukisService {
       where: {
         username,
       },
-      relations: ['yunukis'],
+      relations: ['yunukis', 'yunukis.breed'],
     });
     if (!user) {
       throw new NotFoundException('El usuario no ha sido encontrado');

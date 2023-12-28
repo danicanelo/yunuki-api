@@ -116,14 +116,15 @@ export class YunukisService {
   // Esta función se encargará de actualizar los valores del yunuki vivo haciendo que aumenten su hambre, suciedad y sueño con el paso del tiempo. Para ello hacemos uso del sistema automatizado 'cron' (command run on notice) gracias a la librería schedule de NestJS. Este decorador @Cron nos permite indicar un lapso temporal bajo el cual se ejecutará regularmente la función que contiene
   @Cron('*/30 * * * *') // Añadir un * para convertirlo en segundos en vez de minutos
   async updateYunukis() {
-    // Almacenamos un array con todos los yunukis existentes, de todos los usuarios
-    let yunukis = await this.yunukiRepository.find();
+    // Almacenamos un array con todos los yunukis existentes, de todos los usuarios. Indicamos que cada uno de ellos contenga también las propiedades de su raza asociada
+    let yunukis = await this.yunukiRepository.find({relations: ['breed']});
     // Lo recorremos con la función map y le indicamos que, por cada elemento (yunuki) que encuentre, ejecute las siguiente instrucciones
     yunukis = yunukis.map((yunuki) => {
       // Actualiza los puntos de hambre del yunuki haciendo uso del método getNewValue establecido más abajo, en el que se explica su funcionamiento en detalle. Le pasamos dos valores: los puntos actuales y un valor de referencia que determina cuántos puntos puede subir dentro de un rango aleatorio. Hacemos lo mismo con la suciedad y el cansancio
       yunuki.hunger = this.getNewValue(
         yunuki.hunger,
-        yunuki.breed.hunger_points,
+        yunuki.breed.hunger_points
+        //yunuki.breed.hunger_points,
       );
       yunuki.dirt = this.getNewValue(yunuki.dirt, yunuki.breed.dirt_points);
       yunuki.tiredness = this.getNewValue(

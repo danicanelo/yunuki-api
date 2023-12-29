@@ -113,18 +113,21 @@ export class YunukisService {
     return yunuki;
   }
 
-  // Esta función se encargará de actualizar los valores del yunuki vivo haciendo que aumenten su hambre, suciedad y sueño con el paso del tiempo. Para ello hacemos uso del sistema automatizado 'cron' (command run on notice) gracias a la librería schedule de NestJS. Este decorador @Cron nos permite indicar un lapso temporal bajo el cual se ejecutará regularmente la función que contiene
-  @Cron('*/30 * * * *') // Añadir un * para convertirlo en segundos en vez de minutos
+  // Esta función se encargará de actualizar los valores del yunuki vivo haciendo que aumenten su hambre, suciedad y sueño con el paso del tiempo, así como de hacer que muera si su edad (o alguna de las dichas stats) ha llegado a su fin. Para ello hacemos uso del sistema automatizado 'cron' (command run on notice) gracias a la librería schedule de NestJS. Este decorador @Cron nos permite indicar un lapso temporal bajo el cual se ejecutará regularmente la función que contiene
+  @Cron('*/60 * * * *') // Añadir un * para convertirlo en segundos en vez de minutos
   async updateYunukis() {
+    // Almacenamos la fecha actual, nos servirá para compararla con la fecha de nacimiento de cada yunuki y así determinar su edad
+    const actualDate = new Date();
     // Almacenamos un array con todos los yunukis existentes, de todos los usuarios. Indicamos que cada uno de ellos contenga también las propiedades de su raza asociada
-    let yunukis = await this.yunukiRepository.find({relations: ['breed']});
+    let yunukis = await this.yunukiRepository.find({ relations: ['breed'] });
     // Lo recorremos con la función map y le indicamos que, por cada elemento (yunuki) que encuentre, ejecute las siguiente instrucciones
     yunukis = yunukis.map((yunuki) => {
+      // Llamamos a oldYunuki, establecida más abajo, pasándole como parámetros el yunuki y la fecha actual. La función se encargará de hacer que el yunuki muera si su edad ha llegado a su fin, se detalla su funcionamiento junto a ella.
+      this.oldYunuki(yunuki, actualDate);
       // Actualiza los puntos de hambre del yunuki haciendo uso del método getNewValue establecido más abajo, en el que se explica su funcionamiento en detalle. Le pasamos dos valores: los puntos actuales y un valor de referencia que determina cuántos puntos puede subir dentro de un rango aleatorio. Hacemos lo mismo con la suciedad y el cansancio
       yunuki.hunger = this.getNewValue(
         yunuki.hunger,
-        yunuki.breed.hunger_points
-        //yunuki.breed.hunger_points,
+        yunuki.breed.hunger_points,
       );
       yunuki.dirt = this.getNewValue(yunuki.dirt, yunuki.breed.dirt_points);
       yunuki.tiredness = this.getNewValue(
@@ -145,6 +148,18 @@ export class YunukisService {
     deadYunukis.map((yunuki) => {
       this.ripYunuki(yunuki);
     });
+  }
+
+  // Recibiendo un yunuki y la fecha actual, oldYunuki se encarga de restar la edad actual a la edad de nacimiento del yunuki
+  private oldYunuki(yunuki: Yunuki, date: Date) {
+    // Almacenamos la diferencia entre la fecha actual y la fecha de nacimiento del yunuki
+    const diff = date.getTime() - yunuki.birth.getTime();
+    // Convertimos el valor obtenido a días
+    const days = diff / (1000 * 60 * 60 * 24);
+    // Si se superan los 14 días, se llama a la función que mata al yunuki
+    if (days > 14) {
+      this.ripYunuki(yunuki);
+    }
   }
 
   // Utilizamos este método para "matar" al yunuki recibido por parámetro. Para ello simplemente seteamos su propiedad 'dead', dado que es el hecho de asignarle la fecha de su muerte lo que lo diferencia de un yunuki vivo (si no tuviera fecha de muerte significaría que está vivo). Una vez hecha la operación, actualizamos el yunuki

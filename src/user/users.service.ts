@@ -21,11 +21,6 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  // Método para obtener todos los usuarios
-  getUsers() {
-    return this.userRepository.find();
-  }
-
   //Método para obtener un usuario. Recibe un username.
   getUser(username: string) {
     // El método findOne recibe como parámetro un objeto con dos pares clave-valor (where y relations), donde 'where' funciona a modo de claúsula WHERE en SQL, buscando el usuario cuyo username coincide con el recibido, y relations funciona añadiendo al objeto que retorne (el usuario encontrado) todas las entidades de la tabla yunuki que éste posea

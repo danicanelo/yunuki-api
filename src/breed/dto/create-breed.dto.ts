@@ -17,6 +17,7 @@ export class CreateBreedDto {
   @IsNotEmpty()
   @IsDefined()
   color: string;
+  // OJO a form, posiblemente borrar
   @IsNotEmpty()
   @IsDefined()
   form: string;

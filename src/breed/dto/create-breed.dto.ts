@@ -16,9 +16,5 @@ export class CreateBreedDto {
   tiredness_points: number;
   @IsNotEmpty()
   @IsDefined()
-  color: string;
-  // OJO a form, posiblemente borrar
-  @IsNotEmpty()
-  @IsDefined()
-  form: string;
+  info: string;
 }

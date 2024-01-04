@@ -25,31 +25,28 @@ export class BreedService {
   private async populate() {
     // Obtenemos el total de razas que hay. Como esta tabla de la base de datos va a ser fija (no se van a introducir ni eliminar registros, sino que solo va a servir de consulta y siempre va a contener las mismas razas), si el total es 0 significa que no hay registros y que, por lo tanto, la base de datos se acaba de crear. Por esto necesitamos rellenarla
     const total = await this.breedRepository.count();
-    // Si el total es 0, le indicamos que cree tres registros con diferentes valores para las tres diferentes razas. Cada una de ellas tendrá un campo (hambre, suciedad o sueño) que subirá con mayor rapidez que las demás, además de contar cada raza con diferente color y forma. Para esto hace uso del método createBreed establecido en esta misma clase
+    // Si el total es 0, le indicamos que cree tres registros con diferentes valores para las tres diferentes razas. Cada una de ellas tendrá un campo (hambre, suciedad o sueño) que subirá con mayor rapidez que las demás. Para esto hace uso del método createBreed establecido en esta misma clase.
     if (total === 0) {
       this.createBreed({
         name: 'Yanaka',
-        hunger_points: 6,
-        dirt_points: 2,
+        hunger_points: 5,
+        dirt_points: 3,
         tiredness_points: 2,
-        color: 'green',
-        form: '1',
+        info: 'Los yanaka son una raza de Yunuki.',
       });
       this.createBreed({
         name: 'Yonoko',
         hunger_points: 2,
-        dirt_points: 6,
-        tiredness_points: 2,
-        color: 'blue',
-        form: '2',
+        dirt_points: 5,
+        tiredness_points: 3,
+        info: 'Los yonoko son una raza de Yunuki',
       });
       this.createBreed({
         name: 'Yiniki',
-        hunger_points: 2,
+        hunger_points: 3,
         dirt_points: 2,
-        tiredness_points: 6,
-        color: 'red',
-        form: '3',
+        tiredness_points: 5,
+        info: 'Los yiniki son una raza de Yunuki',
       });
     }
   }

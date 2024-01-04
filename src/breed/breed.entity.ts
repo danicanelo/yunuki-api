@@ -26,7 +26,7 @@ export class Breed {
   tiredness_points: number;
 
   @Column()
-  color: string;
+  info: string;
 
   @OneToMany(() => Yunuki, (yunuki) => yunuki.breed)
   yunukis: Yunuki[];

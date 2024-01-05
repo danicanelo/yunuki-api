@@ -32,21 +32,21 @@ export class BreedService {
         hunger_points: 5,
         dirt_points: 3,
         tiredness_points: 2,
-        info: 'Los yanaka son una raza de Yunuki.',
+        info: 'Los Yanaka se caracterizan por tener mucho hambre y dormir poco.',
       });
       this.createBreed({
         name: 'Yonoko',
         hunger_points: 2,
         dirt_points: 5,
         tiredness_points: 3,
-        info: 'Los yonoko son una raza de Yunuki',
+        info: 'Los Yonoko se caracterizan por ensuciarse mucho y comer poco.',
       });
       this.createBreed({
         name: 'Yiniki',
         hunger_points: 3,
         dirt_points: 2,
         tiredness_points: 5,
-        info: 'Los yiniki son una raza de Yunuki',
+        info: 'Los Yiniki se caracterizan por dormir mucho y ensuciarse poco.',
       });
     }
   }

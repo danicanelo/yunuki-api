@@ -31,8 +31,3 @@ export default class UsersController {
     return this.usersService.getUser(request['user'].username);
   }
 }
-
-/*@Get()
-  getUsers(): Promise<User[]> {
-    return this.usersService.getUsers();
-  }*/ //POSIBLEMENTE INNECESARIO

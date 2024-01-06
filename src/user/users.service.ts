@@ -32,23 +32,6 @@ export class UsersService {
     });
   }
 
-  /*getUserWithRelations(username: string) {
-    return this.userRepository.findOne({
-      where: {
-        username,
-      },
-      relations: ['deadyunukis', 'yunuki'],
-    });
-  }
-
-  deleteUser(id: number) {
-    return this.userRepository.delete({ id });
-  }
-
-  updateUser(id: number, user: UpdateUserDto) {
-    return this.userRepository.update({ id }, user);
-  }*/ //POSIBLEMENTE INNECESARIO
-
   private async populate() {
     const total = await this.userRepository.count();
     if (total === 0) {

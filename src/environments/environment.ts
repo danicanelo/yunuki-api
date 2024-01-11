@@ -12,7 +12,7 @@ export const environment: EnvironmentDto = {
     // Tipo de nuestra DB
     type: 'mysql',
     // Si nuestro 'env' es igual a development conectamos con localhost, si no lo es conectamos con una ip remota (ficticia en nuestro caso actualmente)
-    host: env === 'development' ? 'localhost' : '182.192.56.7',
+    host: env === 'development' ? 'localhost' : 'xxx.xxx.xx.x',
     // Puerto de nuestra DB (MODIFICAR A CONVENIENCIA)
     port: 3306,
     // Usuario, password y database que correspondan a nuestra DB (MODIFICAR A CONVENIENCIA)

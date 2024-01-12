@@ -33,7 +33,7 @@ export class Yunuki {
   hunger: number;
 
   @Column({
-    default: 0,
+    default: 6,
   })
   dirt: number;
 

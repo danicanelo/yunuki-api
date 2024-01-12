@@ -29,24 +29,24 @@ export class BreedService {
     if (total === 0) {
       this.createBreed({
         name: 'Yanaka',
-        hunger_points: 5,
-        dirt_points: 3,
-        tiredness_points: 2,
-        info: 'Los Yanaka se caracterizan por tener mucho hambre y dormir poco.',
-      });
-      this.createBreed({
-        name: 'Yonoko',
         hunger_points: 2,
         dirt_points: 5,
         tiredness_points: 3,
-        info: 'Los Yonoko se caracterizan por ensuciarse mucho y comer poco.',
+        info: 'Los Yanaka son verdes y tienen forma de huevo. Como les encanta jugar, tienden a ensuciarse más que otras razas.',
+      });
+      this.createBreed({
+        name: 'Yonoko',
+        hunger_points: 5,
+        dirt_points: 3,
+        tiredness_points: 2,
+        info: 'Los Yonoko son morados, grandotes y solo piensan en comer.',
       });
       this.createBreed({
         name: 'Yiniki',
         hunger_points: 3,
         dirt_points: 2,
         tiredness_points: 5,
-        info: 'Los Yiniki se caracterizan por dormir mucho y ensuciarse poco.',
+        info: 'Los Yiniki son amarillos y, como la parte superior de la cabeza les pesa tanto, tienden a cansarse rápido y necesitan dormir a menudo.',
       });
     }
   }

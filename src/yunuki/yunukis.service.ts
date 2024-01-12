@@ -114,7 +114,7 @@ export class YunukisService {
   }
 
   // Esta función se encargará de actualizar los valores del yunuki vivo haciendo que aumenten su hambre, suciedad y sueño con el paso del tiempo, así como de hacer que muera si su edad (o alguna de las dichas stats) ha llegado a su fin. Para ello hacemos uso del sistema automatizado 'cron' (command run on notice) gracias a la librería schedule de NestJS. Este decorador @Cron nos permite indicar un lapso temporal bajo el cual se ejecutará regularmente la función que contiene
-  @Cron('*/60 * * * *') // Añadir un * para convertirlo en segundos en vez de minutos
+  @Cron('*/30 * * * *') // Añadir un * para convertirlo en segundos en vez de minutos
   async updateYunukis() {
     // Almacenamos la fecha actual, nos servirá para compararla con la fecha de nacimiento de cada yunuki y así determinar su edad
     const actualDate = new Date();

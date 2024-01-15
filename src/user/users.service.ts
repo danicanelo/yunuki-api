@@ -16,9 +16,23 @@ export class UsersService {
   }
 
   // Método para crear un usuario. Recibe un objeto de tipo CreateUserDto. Devuelve el usuario creado.
-  createUser(user: CreateUserDto) {
+ async createUser(user: CreateUserDto) {
+    const userExists = await this.userExists(user);
+    if(userExists){
+      return null;
+    }
     const newUser = this.userRepository.create(user);
     return this.userRepository.save(newUser);
+  }
+
+  private userExists(user: CreateUserDto){
+    return this.userRepository.exist({
+      where: [{
+        username: user.username,
+      }, {
+        email: user.email,
+      }]
+    });
   }
 
   //Método para obtener un usuario. Recibe un username.

@@ -1,5 +1,6 @@
 import {
   Body,
+  ConflictException,
   Controller,
   Get,
   Post,
@@ -20,8 +21,12 @@ export default class UsersController {
 
   // Al hacer una solicitud HTTP POST a la ruta 'users/register': 1) Se ejecuta una función que obtiene como argumento un objeto de tipo CreateUserDto, del que se espera que contenga los valores necesarios (obtenidos del cuerpo de la solicitud) para el registro del usuario (username, email y password). 2) Llama a la función homónima del servicio pasándole el objeto con los valores, ésta se encargará de introducir el registro en la base de datos. 3) Devuelve el usuario creado
   @Post('register')
-  createUser(@Body() newUser: CreateUserDto): Promise<User> {
-    return this.usersService.createUser(newUser);
+ async createUser(@Body() newUser: CreateUserDto): Promise<User> {
+    const createUser = await this.usersService.createUser(newUser);
+    if(!createUser){
+      throw new ConflictException("El usuario ya existe. Elige otro.")
+    }
+    return createUser;
   }
 
   // Al hacer una solicitud HTTP GET a la ruta 'users/me': 1) Se ejecuta una función que obtiene como argumento la solicitud. 2) Llama a la función homónima del servicio pasándole como argumento el nombre de usuario, obtenido de la solicitud 3) Devuelve el usuario encontrado, que debería ser el usuario conectado en este momento. Aquí sí que protegemos el endpoint con una guardia dado que la operación pide datos a los que no debería poder acceder un usuario no registrado

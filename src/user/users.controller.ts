@@ -24,7 +24,9 @@ export default class UsersController {
   async createUser(@Body() newUser: CreateUserDto): Promise<User> {
     const createUser = await this.usersService.createUser(newUser);
     if (!createUser) {
-      throw new ConflictException('El usuario ya existe. Elige otro.');
+      throw new ConflictException(
+        'El usuario ya existe. Elige otro nombre de usuario y/o email.',
+      );
     }
     return createUser;
   }

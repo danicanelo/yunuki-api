@@ -19,12 +19,12 @@ export default class UsersController {
   // El constructor automáticamente instancia un objeto de tipo UsersService para que podamos conectar con el servicio procedente
   constructor(private readonly usersService: UsersService) {}
 
-  // Al hacer una solicitud HTTP POST a la ruta 'users/register': 1) Se ejecuta una función que obtiene como argumento un objeto de tipo CreateUserDto, del que se espera que contenga los valores necesarios (obtenidos del cuerpo de la solicitud) para el registro del usuario (username, email y password). 2) Llama a la función homónima del servicio pasándole el objeto con los valores, ésta se encargará de introducir el registro en la base de datos. 3) Devuelve el usuario creado
+  // Al hacer una solicitud HTTP POST a la ruta 'users/register': 1) Se ejecuta una función que obtiene como argumento un objeto de tipo CreateUserDto, del que se espera que contenga los valores necesarios (obtenidos del cuerpo de la solicitud) para el registro del usuario (username, email y password). 2) Llama a la función homónima del servicio pasándole el objeto con los valores, ésta se encargará de introducir el registro en la base de datos. 3) Si el intento de creación del usuario ha devuelto null, significa que el usuario que se está intentando registrar ya existe, por lo que lanzamos una excepción que informe de ello 4) Devuelve el resultado del intento de creación
   @Post('register')
- async createUser(@Body() newUser: CreateUserDto): Promise<User> {
+  async createUser(@Body() newUser: CreateUserDto): Promise<User> {
     const createUser = await this.usersService.createUser(newUser);
-    if(!createUser){
-      throw new ConflictException("El usuario ya existe. Elige otro.")
+    if (!createUser) {
+      throw new ConflictException('El usuario ya existe. Elige otro.');
     }
     return createUser;
   }

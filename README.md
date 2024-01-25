@@ -5,7 +5,7 @@
 
 ## Descripción
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+API para la aplicación Yunuki.
 
 ## Instalación
 
@@ -17,5 +17,11 @@ $ npm install
 
 ```bash
 $ npm run start
+```
+
+## Modo desarrollo (reinicio automático tras cualquier cambio)
+
+```bash
+$ npm run start:dev
 ```
 

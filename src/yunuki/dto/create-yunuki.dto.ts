@@ -1,13 +1,9 @@
-import { IsDefined, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
+import { Breed } from 'src/breed/breed.entity';
 
 export class CreateYunukiDto {
-  @IsDefined()
   @IsNotEmpty()
   name: string;
-  @IsDefined()
   @IsNotEmpty()
-  breed: string;
-  @IsDefined()
-  @IsNotEmpty()
-  color: string;
+  breed: Breed;
 }

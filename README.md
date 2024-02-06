@@ -7,6 +7,12 @@
 
 API para la aplicación Yunuki.
 
+## Pasos previos
+
+Crear una base de datos MySQL vacía a la que conectar la API (nombre por defecto: `yunuki_db`, configurar `port`, `username` y `password` en `src/environments/environment.ts`).
+
+La API generará las tablas al conectar con la base de datos.
+
 ## Instalación
 
 ```bash

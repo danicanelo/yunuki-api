@@ -13,7 +13,7 @@ Crear una base de datos MySQL vacía a la que conectar la API (nombre por defect
 
 La API generará las tablas al conectar con la base de datos.
 
-## Instalación
+## Instalación de dependencias
 
 ```bash
 $ npm install

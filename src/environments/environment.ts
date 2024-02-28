@@ -17,7 +17,7 @@ export const environment: EnvironmentDto = {
     port: 3306,
     // Usuario, password y database que correspondan a nuestra DB (MODIFICAR A CONVENIENCIA)
     username: 'root',
-    password: '1234',
+    password: 'root',
     database: 'yunuki_db',
     // Entidades que representan las tablas de nuestra DB
     entities: [Breed, Yunuki, User],

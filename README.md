@@ -5,7 +5,7 @@
 
 ## Descripción
 
-API para la aplicación Yunuki.
+API para la aplicación [Yunuki](https://github.com/danicanelo/yunuki).
 
 ## Pasos previos
 

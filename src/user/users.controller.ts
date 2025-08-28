@@ -14,14 +14,14 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export default class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post('register')
   async createUser(@Body() newUser: CreateUserDto): Promise<User> {
     const createUser = await this.usersService.createUser(newUser);
     if (!createUser) {
       throw new ConflictException(
-        'El usuario ya existe. Elige otro nombre de usuario y/o email.',
+        'El usuario y/o el email ya están en uso. Elige otro nombre de usuario y/o email.',
       );
     }
     return createUser;

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,10 +9,33 @@ import { Yunuki } from './yunuki.entity';
 
 @Injectable()
 export class YunukisService {
+  epitaphs = [
+    'Aquí yace lo que nunca debió nacer.',
+    'Se apagó para siempre. Sin testigos.',
+    'Un sueño interrumpido por la realidad.',
+    'No tuvo salvación. Ni reinicio.',
+    'Se desvaneció en el vacío binario.',
+    'Aquí descansa un corazón de código.',
+    'No parpadea más. No respira más.',
+    'Se rompió sin hacer ruido.',
+    'Una vida medida en ciclos.',
+    'Se fue cuando nadie miraba.',
+    'No dejó mensaje de despedida.',
+    'Aquí yace lo efímero hecho digital.',
+    'Se apagó sin razón aparente.',
+    'Un archivo borrado para siempre.',
+    'No tuvo tiempo de decir adiós.',
+    'Se despidió sin lágrimas digitales.',
+    'Aquí descansa lo que ya no funciona.',
+    'Se perdió en el abismo del olvido.',
+    'No resistió el paso del tiempo real.',
+    'Se quedó sin batería... y sin sentido.',
+  ];
+
   constructor(
     @InjectRepository(Yunuki) private yunukiRepository: Repository<Yunuki>,
     @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   async createYunuki(yunuki: CreateYunukiDto, username: string) {
     try {
@@ -129,6 +153,8 @@ export class YunukisService {
 
   private ripYunuki(yunuki: Yunuki) {
     yunuki.dead = new Date();
+    const randomIndex = Math.floor(Math.random() * this.epitaphs.length);
+    yunuki.epitaph = this.epitaphs[randomIndex];
     this.yunukiRepository.save(yunuki);
   }
 

@@ -25,6 +25,11 @@ export class Yunuki {
   dead: Date;
 
   @Column({
+    nullable: true,
+  })
+  epitaph: string;
+
+  @Column({
     default: 0,
   })
   hunger: number;

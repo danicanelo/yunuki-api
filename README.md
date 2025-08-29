@@ -1,33 +1,22 @@
 # Yunuki API
 
-![Node Version](https://img.shields.io/badge/Node_version-18.16.0-green)
-![NPM Version](https://img.shields.io/badge/NPM_version-9.5.1-red)
+## Description
 
-## Descripción
+Backend API for the Yunuki virtual pet application (https://github.com/danicanelo/yunuki-app)
 
-API para la aplicación [Yunuki](https://github.com/danicanelo/yunuki).
+## Prerequisites
 
-## Pasos previos
+- Create an empty MySQL database (default name: `yunuki_db`)
+- Configure database connection in `src/environments/environment.ts`
 
-Crear una base de datos MySQL vacía a la que conectar la API (nombre por defecto: `yunuki_db`, configurar `port`, `username` y `password` en `src/environments/environment.ts`).
+The API will automatically generate required tables on first connection.
 
-La API generará las tablas al conectar con la base de datos.
+## 🚀 Quick Start
 
-## Instalación de dependencias
+1.  Install dependencies:
 
-```bash
-$ npm install
-```
+    `npm install`
 
-## Lanzar la aplicación
+2.  Start the app:
 
-```bash
-$ npm run start
-```
-
-## Modo desarrollo (reinicio automático tras cualquier cambio)
-
-```bash
-$ npm run start:dev
-```
-
+    `npm run start:dev`

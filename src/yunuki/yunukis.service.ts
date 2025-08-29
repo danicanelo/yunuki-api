@@ -10,9 +10,7 @@ import { Yunuki } from './yunuki.entity';
 @Injectable()
 export class YunukisService {
   epitaphs = [
-    'Aquí yace lo que nunca debió nacer.',
     'Se apagó para siempre. Sin testigos.',
-    'Un sueño interrumpido por la realidad.',
     'No tuvo salvación. Ni reinicio.',
     'Se desvaneció en el vacío binario.',
     'Aquí descansa un corazón de código.',
@@ -21,15 +19,12 @@ export class YunukisService {
     'Una vida medida en ciclos.',
     'Se fue cuando nadie miraba.',
     'No dejó mensaje de despedida.',
-    'Aquí yace lo efímero hecho digital.',
     'Se apagó sin razón aparente.',
     'Un archivo borrado para siempre.',
     'No tuvo tiempo de decir adiós.',
     'Se despidió sin lágrimas digitales.',
-    'Aquí descansa lo que ya no funciona.',
     'Se perdió en el abismo del olvido.',
     'No resistió el paso del tiempo real.',
-    'Se quedó sin batería... y sin sentido.',
   ];
 
   constructor(

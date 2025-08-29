@@ -49,7 +49,7 @@ export class UsersService {
       this.createUser({
         username: 'yunukiDemo',
         email: 'testing@testing.com',
-        password: '123456',
+        password: '123456Az',
       });
     }
   }

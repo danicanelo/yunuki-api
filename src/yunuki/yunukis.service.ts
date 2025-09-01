@@ -141,7 +141,7 @@ export class YunukisService {
   private oldYunuki(yunuki: Yunuki, date: Date) {
     const diff = date.getTime() - yunuki.birth.getTime();
     const days = diff / (1000 * 60 * 60 * 24);
-    if (days > 14) {
+    if (days > 7) {
       this.ripYunuki(yunuki);
     }
   }

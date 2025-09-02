@@ -11,10 +11,11 @@ services:
       - key: NODE_VERSION
         value: 20.18.1
       - key: DB_TYPE
+        value: postgres
+      - key: DB_HOST
         fromDatabase:
           name: yunuki-db
-      - key: DB_HOST
-        value: postgres
+          property: CONNECTION_STRING
       - key: DB_USERNAME
         fromDatabase:
           name: yunuki-db

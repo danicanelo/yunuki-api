@@ -15,23 +15,23 @@ services:
       - key: DB_HOST
         fromDatabase:
           name: yunuki-db
-          property: HOST
+          property: host
       - key: DB_PORT
         fromDatabase:
           name: yunuki-db
-          property: PORT
+          property: port
       - key: DB_USERNAME
         fromDatabase:
           name: yunuki-db
-          property: USER
+          property: user
       - key: DB_PASSWORD
         fromDatabase:
           name: yunuki-db
-          property: PASSWORD
+          property: password
       - key: DB_DATABASE
         fromDatabase:
           name: yunuki-db
-          property: DATABASE
+          property: database
 
 databases:
   - name: yunuki-db

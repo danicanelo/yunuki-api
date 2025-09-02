@@ -32,6 +32,7 @@ services:
         fromDatabase:
           name: yunuki-db
           property: DATABASE
-    databases:
-      - name: yunuki-db
-        plan: free
+
+databases:
+  - name: yunuki-db
+    plan: free

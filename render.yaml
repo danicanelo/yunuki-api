@@ -8,14 +8,18 @@ services:
     buildCommand: npm install && npx nest build
     startCommand: npm run start:prod
     envVars:
-      - key: NODE_VERSION
-        value: 20.18.1
+      - key: PORT
+        value: 10000
       - key: DB_TYPE
         value: postgres
       - key: DB_HOST
         fromDatabase:
           name: yunuki-db
-          property: CONNECTION_STRING
+          property: HOST
+      - key: DB_PORT
+        fromDatabase:
+          name: yunuki-db
+          property: PORT
       - key: DB_USERNAME
         fromDatabase:
           name: yunuki-db
@@ -28,12 +32,6 @@ services:
         fromDatabase:
           name: yunuki-db
           property: DATABASE
-      - key: DB_PORT
-        fromDatabase:
-          name: yunuki-db
-          property: PORT
-      - key: PORT
-        value: 10000
     databases:
       - name: yunuki-db
         plan: free

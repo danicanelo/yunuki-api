@@ -14,9 +14,7 @@ services:
         fromDatabase:
           name: yunuki-db
       - key: DB_HOST
-        fromDatabase:
-          name: yunuki-db
-          property: CONNECTION_STRING
+        value: postgres
       - key: DB_USERNAME
         fromDatabase:
           name: yunuki-db

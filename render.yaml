@@ -13,9 +13,7 @@ services:
       - key: DB_TYPE
         value: postgres
       - key: DB_HOST
-        fromDatabase:
-          name: yunuki-db
-          property: host
+        value: dpg-d2rfckfdiees73eah8v0-a.oregon-postgres.render.com
       - key: DB_PORT
         fromDatabase:
           name: yunuki-db

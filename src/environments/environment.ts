@@ -10,5 +10,9 @@ export const environment: EnvironmentDto = {
     database: process.env.DB_DATABASE,
     entities: [__dirname + '/../**/*.entity{.ts,.js}'],
     synchronize: process.env.NODE_ENV === 'development',
+    ssl: true,
+    extra: {
+      ssl: true,
+    },
   },
 };

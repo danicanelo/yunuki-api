@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: yunuki-backend
+    env: node
+    region: frankfurt
+    plan: free
+    rootDir: .
+    buildCommand: npm install && npx nest build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.1
+      - key: DB_TYPE
+        fromDatabase:
+          name: yunuki-db
+          property: DATABASE_TYPE
+      - key: DB_HOST
+        fromDatabase:
+          name: yunuki-db
+          property: CONNECTION_STRING
+      - key: DB_USERNAME
+        fromDatabase:
+          name: yunuki-db
+          property: USER
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: yunuki-db
+          property: PASSWORD
+      - key: DB_DATABASE
+        fromDatabase:
+          name: yunuki-db
+          property: DATABASE
+      - key: DB_PORT
+        fromDatabase:
+          name: yunuki-db
+          property: PORT
+      - key: PORT
+        value: 10000
+    databases:
+      - name: yunuki-db
+        plan: free

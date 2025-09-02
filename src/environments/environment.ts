@@ -2,7 +2,7 @@ import { EnvironmentDto } from './environment.dto';
 
 export const environment: EnvironmentDto = {
   typeOrmModuleOptions: {
-    type: process.env.DB_TYPE as 'mysql',
+    type: process.env.DB_TYPE as 'postgres',
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT),
     username: process.env.DB_USERNAME,

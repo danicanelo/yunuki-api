@@ -13,7 +13,6 @@ services:
       - key: DB_TYPE
         fromDatabase:
           name: yunuki-db
-          property: DATABASE_TYPE
       - key: DB_HOST
         fromDatabase:
           name: yunuki-db

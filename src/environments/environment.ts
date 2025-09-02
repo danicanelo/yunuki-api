@@ -1,19 +1,14 @@
-import { Breed } from 'src/breed/breed.entity';
-import { User } from 'src/user/user.entity';
-import { Yunuki } from 'src/yunuki/yunuki.entity';
 import { EnvironmentDto } from './environment.dto';
-
-const env = process.env.NODE_ENV;
 
 export const environment: EnvironmentDto = {
   typeOrmModuleOptions: {
-    type: 'mysql',
-    host: env === 'development' ? 'localhost' : 'xxx.xxx.xx.x',
-    port: 3306,
-    username: 'root',
-    password: 'root',
-    database: 'yunuki_db',
-    entities: [Breed, Yunuki, User],
-    synchronize: true,
+    type: process.env.DB_TYPE as 'mysql',
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT),
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+    synchronize: process.env.NODE_ENV === 'development',
   },
 };

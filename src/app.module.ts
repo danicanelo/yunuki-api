@@ -5,13 +5,35 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { BreedModule } from './breed/breed.module';
-import { environment } from './environments/environment';
 import { UsersModule } from './user/users.module';
 import { YunukisModule } from './yunuki/yunukis.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConnectionOptions } from 'typeorm';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(environment.typeOrmModuleOptions),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
+    }),
+    TypeOrmModule.forRootAsync({
+      useFactory: (configService: ConfigService) => {
+        const type = configService.get<'mysql' | 'postgres'>('DB_TYPE');
+
+        return {
+          type,
+          host: configService.get('DB_HOST'),
+          port: configService.get<number>('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_DATABASE'),
+          autoLoadEntities: true,
+          synchronize: true,
+          logging: true,
+        } as ConnectionOptions;
+      },
+      inject: [ConfigService],
+    }),
     UsersModule,
     YunukisModule,
     AuthModule,
@@ -21,4 +43,4 @@ import { YunukisModule } from './yunuki/yunukis.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -27,9 +27,9 @@ export class UsersService {
         {
           username: user.username,
         },
-        {
-          email: user.email,
-        },
+        // {
+        //   email: user.email,
+        // },
       ],
     });
   }
@@ -48,7 +48,7 @@ export class UsersService {
     if (total === 0) {
       this.createUser({
         username: 'yunukiDemo',
-        email: 'testing@testing.com',
+        // email: 'testing@testing.com',
         password: '123456Az',
       });
     }

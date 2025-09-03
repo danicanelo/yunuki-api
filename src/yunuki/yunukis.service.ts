@@ -111,7 +111,7 @@ export class YunukisService {
     return yunuki;
   }
 
-  @Cron('*/5 * * * *')
+  @Cron('*/1 * * * *')
   async updateYunukis() {
     const actualDate = new Date();
     let yunukis = await this.yunukiRepository.find({ relations: ['breed'] });

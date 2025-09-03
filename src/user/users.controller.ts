@@ -22,7 +22,7 @@ export default class UsersController {
     const createUser = await this.usersService.createUser(newUser);
     if (!createUser) {
       throw new ConflictException(
-        'El usuario y/o el email ya están en uso. Elige otro nombre de usuario y/o email.',
+        'El nombre de usuario ya está en uso. Elige otro nombre de usuario.',
       );
     }
     return createUser;

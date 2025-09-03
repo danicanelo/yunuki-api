@@ -9,7 +9,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {
-    this.populate();
+    // this.populate();
   }
 
   async createUser(user: CreateUserDto) {

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -30,6 +31,7 @@ import { ConnectionOptions } from 'typeorm';
           autoLoadEntities: true,
           synchronize: true,
           logging: true,
+          ...(configService.get('DB_TYPE') === 'postgres' ? { ssl: true } : {}),
         } as ConnectionOptions;
       },
       inject: [ConfigService],

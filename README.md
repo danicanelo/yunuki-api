@@ -7,9 +7,6 @@ Backend API for the Yunuki virtual pet application (https://github.com/danicanel
 ## Prerequisites
 
 - Create an empty MySQL database (default name: `yunuki_db`)
-- Configure database connection in `src/environments/environment.ts`
-
-The API will automatically generate required tables on first connection.
 
 ## 🚀 Quick Start
 
